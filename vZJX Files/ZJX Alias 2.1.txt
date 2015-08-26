@@ -1,0 +1,222 @@
+; Alias for ZJX
+; Redone June 2011 by Daniel Hawton
+
+; Standard
+.r Roger.
+.or Roger, on request.
+.sb Standby.
+.rsb Roger, stand by.
+.hoc Contact $radioname($1) $freq($1).
+.rem Remain this frequency.
+.fca Frequency Change Approved.
+.rst Radar services terminated.
+.smvfr Squawk and maintain VFR.
+.mt Maintain $1
+.noatc No further ATC services available.
+.fb Thanks for flying ZJX! Did you get good service? Feedback is appreciated at http://www.zjxartcc.org.
+
+; CLEARANCE:
+; Examples:
+; Arguments:
+
+;
+; Examples:
+; Aircraft filed KATL at FL230 (KJAX..DBN..KATL)
+; JAX APP (1N) is on 118.0
+; Cleared as filed: Cleared to KATL airport, as filed. Maintain 3000. Expect FL230 10 minutes after departure. Departure frequency 118.0. Squawk 1070.
+;   .caf .ca3 1N
+; Cleared via runway heading, radar vectors ___, then as filed.
+;   .crv DBN .ca3 1N
+; Cleared via heading __, radar vectors __, then as filed.
+;   .chrv 130 DBN .ca3 1N
+; Jacksonville 4 Departure:
+;   .cd JAX4 .ca3 1N
+; MCO VFR dep:
+;   .cb Orlando .mv 3500 .df 4E
+
+.clr Cleared to
+
+.caf Cleared to $arr airport, as filed. 
+
+.cdp Cleared to $arr airport via $uc($1) departure, then as filed. Climb via the SID. Departure frequency $freq($2), squawk $squawk
+.cdt Cleared to $arr airport via $uc($1) departure, $2 transition, then as filed. Climb via the SID. Departure frequency $freq($3), squawk $squawk
+.crv Cleared to $arr airport via runway heading, radar vectors uc($1), then as filed.
+.chrv Cleared to $arr airport via fly heading $1, radar vectors uc($2), then as filed.
+
+.ca3 maintain 3000, expect $cruise 10 minutes after departure. Departure frequency $freq($1), squawk $squawk
+.ca5 maintain 5000, expect $cruise 10 minutes after departure. Departure frequency $freq($1), squawk $squawk
+.cam maintain $1, expect $cruise 10 minutes after departure. Departure frequency $freq($1), squawk $squawk
+.ca3u maintain 3000, expect $cruise 10 minutes after departure. Departure offline. Squawk $squawk
+.ca5u maintain 5000, expect $cruise 10 minutes after departure. Departure offline. Squawk $squawk
+.camu maintain $1, expect $cruise 10 minutes after departure. Departure offline. Squawk $squawk
+.ca3m maintain 3000, expect $cruise 10 minutes after departure. Departure with me,squawk $squawk
+.ca5m maintain 5000, expect $cruise 10 minutes after departure. Departure with me,squawk $squawk
+
+.mv Maintain VFR at or below $1.
+.mvb You are cleared into the Orlando Class Bravo. Maintain VFR at or below $1. Departure frequency $freq($2), squawk $squawk
+
+.rbc Read back correct.
+.rbca Read back correct, altimeter $altim($dep).
+.ctt Contact $radioname($1) on $freq($1) when ready to taxi.
+
+; GROUND AA
+.push Push back and engine start up at pilot's discretion. Advise when ready to taxi.
+.tx Runway $1, taxi via $2 $3 $4 $5 $6 $7 $8 $9
+.atd Runway $1, air taxi via direct.
+.attd Taxiway $1 at $2, air taxi via direct.
+.htx Runway $1, hover taxi via $2 $3 $4 $5 $6 $7 $8 $9
+.hs Hold short of runway $1
+.hst Hold short of taxiway $1
+.wa Wind $wind($dep), altimeter $altim($dep).
+.gw Give way to the $2 $3 on $1
+.gstop Ground stop in effect. Hold engine start and push back til advised.
+.edct Your expected departure clearance time is $1Z.  Time now $2Z.
+.ctaxi Continue taxi
+.cross Cross runway $1
+.ctcr .ctaxi .cross $1
+.mon Monitor the tower $freq($1)
+.uvi Unable VFR, reporting IFR conditions.
+.txb Taxi to $1 via $2 $3 $4 $5 $6 $7 $8 $9
+.txf Taxi to $1 this frequency
+
+; TOWER
+.luaw Runway $1, line up and wait.
+.tf Traffic a $1, $2 mile final.
+.thp Traffic holding in position.
+.th Traffic holding in position runway $1.
+.tl Traffic landing runway $1.
+.td Traffic departing runway $1.
+.cft Runway $1, cleared for takeoff.
+.cftw Runway $1, wind $wind($dep), cleared for takeoff. Fly heading $2.
+.cftwd Runway $1, wind $wind($dep), cleared for takeoff. Change to departure.
+.cftfl Runway $1, full length, cleared for takeoff.
+.cftflw Runway $1, wind $wind($dep), cleared for takeoff.
+.cft@ Runway $1 at $2, cleared for takeoff.
+.cftw@ Runway $1 at $2, wind $wind($dep), cleared for takeoff.
+.cftwd@ Runway $1 at $2, wind $wind($dep), cleared for takeoff. Change to departure.
+.ctl Runway $1, cleared to land.
+.ctlw Runway $1, wind $wind($arr), cleared to land.
+.ctlaw Runway $1, wind $wind($2), cleared to land.
+.co Runway $1, cleared for the option.
+.cow Runway $1, wind $wind($arr), cleared for the option.
+.cos Runway $1, cleared for the option.  Stop and go unavailable.
+.cosw Runway $1, wind $wind($arr), cleared for the option.  Stop and go unavailable.
+.ctg Runway $1, cleared touch and go.
+.ctgw Runway $1, wind $wind($arr), cleared touch and go.
+.cla Runway $1, cleared low approach.
+.claw Runway $1, wind $wind($arr), cleared low approach.
+.cont Runway $1, continue.
+.mvd make $1 $2 departure.
+.cta $1 closed traffic approved.
+.tfc make $1 closed traffic to runway $2
+.misins Fly the missed approach procedure as published.
+.mid Traffic crossing midfield.
+.ewa Exit $1 when able
+.exit Exit at $1
+
+.ent Enter a $1 $2 for runway $3.
+
+; Basic RADAR
+.al Altimeter $altim($1).
+.sq Squawk $squawk
+.tisq Transponder appears inoperative, reset transponder, squawk $squawk.
+.wrsq You appear to be squawking the wrong code.  Reset transponder and squawk $squawk.
+.stby Squawk standby.
+.vcfr vectors for
+.vcto vectors to
+.rc Radar contact
+.rcp Radar contact $dist($1) miles $bear($1) of $1
+.at $1 altimeter $altim($1)
+.syalt Say altitude
+.id Ident
+.cm Climb and maintain $1
+.dm Descend and maintain $1
+.rva Resume appropriate VFR altitudes
+.mvfr Maintain VFR
+.rcl Radar contact lost
+.rep Report over $1
+.term Radar services terminated.
+.lvas Leaving my airspace. Radar services terminated, frequency changed approved.
+
+.fh Fly heading $1.
+.tdct Turn $1 heading $2, when able proceed direct $3.
+.pd Proceed direct $1.
+.cd Cleared direct $1, filed route.
+.cddp Cleared direct $1, resume the $2 departure.
+.lt Turn left heading $1.
+.rt Turn right heading $1.
+.ltd Turn left direct $1.
+.rtd Turn right direct $1.
+.fph Fly present heading.
+.frh Fly runway heading.
+.360r Make a right 360 degree turn.
+.360l Make a left 360 degree turn.
+.dn Descend now to $1.
+.mb Maintain block $1 through $2.
+.aft After $1
+.isk Increase speed to $1 knots.
+.rsk Reduce speed to $1 knots.
+.xd do not exceed $1 $2
+.ns Resume normal speed.
+.si Say airspeed.
+.sm Say mach number.
+
+.exa Expect $2 $3 approach to runway $1
+.vf Vectors to final approach course
+.vd Vectors for descent
+.vt Vectors for traffic
+.vc Vectors for climb
+.vac Expect vectors across final for $1
+
+.ra $arr is at $oclock($arr) and $dist($arr) miles, report field in sight
+
+.apreq When able, say approach request.
+.vmc $1 reporting VFR conditions. Wind $wind($1), altimeter $altim($1).
+.imc $1 reporting IFR conditions. Wind $wind($1), altimeter $altim($1).
+.cvis Cleared visual approach runway $1
+.cvisa Cleared visual approach to $arr
+.flw Follow that traffic
+.iloc Intercept the runway $1 localizer
+.irado Intercept the $1 $2 radial outbound
+.iradi Intercept the $1 $2 radial inbound
+.ibearo Intercept the $1 $2 bearing outbound
+.ibeari Intercept the $1 $2 bearing inbound
+.est Report established
+.xloc You appear to have crossed the localizer, turn $1 heading $2, vectors back to the intercept the localizer.
+.canapp Cancel approach clearance.
+
+.ptac $dist($1) miles from $1, turn $2 heading $3, maintain $4 until established on the localizer.  Cleared $5 $6 $7 $8 approach.
+.phac $dist($1) miles from $1, fly heading $2, maintain $3 until established on the localizer.  Cleared $5 $6 $7 $8 approach.
+.ptacf $dist($1) miles from $1, turn $2 heading $3, maintain $4 until established on the final approach course.  Cleared $5 $6 $7 $8 approach.
+.phacf $dist($1) miles from $1, fly heading $2, maintain $3 until established on the final approach course.  Cleared $5 $6 $7 $8 approach.
+.aftc After $1, .capp $2 $3 $4 $5
+.capp Cleared $2 $3 $4 runway $1 approach.
+.cra Cross $1 at or above $2
+.crb Cross $1 at or below $2
+.cr Cross $1 at $2
+
+; Releases
+.rls Released for departure.  Time now $1Z.  Clearance void if not off by $2Z.
+.hdrlsd Hold for release.  Expect a $1 minute delay.
+.hdrlsr Hold for release.  Advise number $1 for departure.
+.repa Report airborne this frequency.
+.repp Report passing $1 this frequency.
+.etca Entering controlled airspace, 
+
+.urra .rbc .rls $1 $2 .fca .repa
+.urrp .rbc .rls $1 $2 .fca .repp $3
+.uhrd .rbc .hdrlsd $1 .fca
+.uhrn .rbc .hdrlsr $1 .fca
+.uterm .rst .repcanmis .chadv
+.ifrcan IFR Cancellation received.
+.ifrcanair IFR cancellation received.  Squawk and maintain VFR.
+
+.notrf No traffic observed between you and the field.
+.chadv Change to advisory frequency approved.
+.chadvcan .chadv .repcanmis
+.canserv .rst .smvfr .fca
+.repcanmis Report cancellation of IFR or missed approach this frequency.
+
+; Airspace phraseology:
+.cb Cleared into the $1 Class Bravo airspace.
+.lvb Leaving the $1 Class Bravo airspace.
